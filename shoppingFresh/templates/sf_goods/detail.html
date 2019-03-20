@@ -1,0 +1,128 @@
+{% extends 'sf_goods/goodsbase.html' %}
+
+{% block head %}
+<script type="text/javascript">
+		function add(){
+			num = parseFloat($('.num_show').val());
+			$('.num_show').val(num+1);
+			$('.num_show').blur();
+		}
+		function minus(){
+			num = parseFloat($('.num_show').val());
+			if(num<=1){
+				return;
+			}
+			$('.num_show').val(num-1);
+			$('.num_show').blur();
+		}
+
+		$(function(){
+			$('.num_show').blur(function(){
+				num = parseInt($('.num_show').val());
+				if(num<=1){
+					num=1;
+				}
+				price = parseFloat($('#goodsprice').text());
+				total = num * price;
+				$('.num_show').val(num);
+				$('#goodstotal').text(total.toFixed(2)+'元');
+			});
+
+			//立即購買
+			$('#buy_btn').click(function () {
+				//判斷是否已登錄,若未登錄則提示先登錄
+				if($('.login_btn').text().indexOf('登錄') >= 0){
+					alert('請登錄後繼續購買');
+					location.href='/user/login/';
+					return;
+				}
+				//新增至購物車
+				num = parseInt($('.num_show').val());
+				$.get('/cart/add_{{goods.id}}_'+num+'/',function (data) {
+					//轉向至訂單頁面
+					location.href='/order/?cart_id=' + data.cart_id;
+				});
+			});
+		});
+</script>
+{% endblock head %}
+
+{% block detail %}
+	<div class="goods_detail_con clearfix">
+		<input type="hidden" id="goods_id" value="{{goods.id}}">
+		<div class="goods_detail_pic fl"><img src="/static/{{goods.goodspic}}"></div>
+
+		<div class="goods_detail_list fr">
+			<h3>{{goods.goodstitle}}</h3>
+			<p>{{goods.goodsintro}}</p>
+			<div class="prize_bar">
+				<span class="show_pirze">$<em id="goodsprice">{{goods.goodsprice}}</em></span>
+				<span class="show_unit">單  位：{{goods.goodsunit}}</span>
+			</div>
+			<div class="goods_num clearfix">
+				<div class="num_name fl">數  量：</div>
+				<div class="num_add fl">
+					<input type="text" class="num_show fl" value="1">
+					<a href="javascript:add();" class="add fr">+</a>
+					<a href="javascript:minus();" class="minus fr">-</a>
+				</div> 
+			</div>
+			<div class="total">總金額：<em id="goodstotal">{{goods.goodsprice}}元</em></div>
+			<div class="operate_btn">
+				<a href="javascript:;" class="buy_btn" id="buy_btn">立即購買</a>
+				<a href="javascript:;" class="add_cart" id="add_cart">加入購物車</a>
+			</div>
+		</div>
+	</div>
+{% endblock detail %}
+
+{% block detail2 %}
+		<div class="r_wrap fr clearfix">
+			<ul class="detail_tab clearfix">
+				<li class="active">商品介紹</li>
+				<li>買家評價</li>
+			</ul>
+
+			<div class="tab_content">
+				<dl>
+					<dt>商品詳情：</dt>
+					<dd>{{goods.goodscontent|safe}}</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+
+	<div class="add_jump"></div>
+
+	<script type="text/javascript">
+		var $add_x = $('#add_cart').offset().top;
+		var $add_y = $('#add_cart').offset().left;
+
+		var $to_x = $('#show_count').offset().top;
+		var $to_y = $('#show_count').offset().left;
+
+		$(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
+		$('#add_cart').click(function(){
+			//判斷是否已登錄,若未登錄則提示先登錄
+			if($('.login_btn').text().indexOf('登錄')>=0){
+				alert('請登錄後繼續購買');
+				location.href='/user/login/'
+				return;
+			}
+
+			//動畫
+			$(".add_jump").stop().animate({
+				'left': $to_y+7,
+				'top': $to_x+7},
+				"fast", function() {
+					$(".add_jump").fadeOut('fast',function(){});
+			});
+
+			//ajax請求
+			num = parseInt($('.num_show').val());
+			$.get('/cart/add_{{goods.id}}_'+ num + '/', function(data){
+				$('#show_count').text(data.count_of_cart);
+			});
+		});
+	</script>
+{% endblock detail2 %}

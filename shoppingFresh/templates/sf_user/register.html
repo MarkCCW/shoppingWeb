@@ -1,0 +1,56 @@
+{% extends "base_bottom.html" %}
+
+{% block head %}
+	<script type="text/javascript" src="/static/js/register.js"></script>
+{% endblock head %}
+
+{% block body %}
+	<div class="register_con">
+		<div class="l_con fl">
+			<a class="reg_logo"><img src="/static/images/logo02.png"></a>
+			<div class="reg_slogan">生鮮購物  ·  購物生鮮</div>
+			<div class="reg_banner"></div>
+		</div>
+		<div class="r_con fr">
+			<div class="reg_title clearfix">
+				<h1>用戶註冊</h1>
+				<a href="/user/login">登錄</a>
+			</div>
+			<div class="reg_form clearfix">
+				<form action="/user/register_handle/" method="post">
+					{% csrf_token %}
+				<ul>
+					<li>
+						<label>用户名:</label>
+						<input type="text" name="user_name" id="user_name">
+						<span class="error_tip">提示訊息</span>
+					</li>					
+					<li>
+						<label>密碼:</label>
+						<input type="password" name="pwd" id="pwd">
+						<span class="error_tip">提示訊息</span>
+					</li>
+					<li>
+						<label>確認密碼:</label>
+						<input type="password" name="cpwd" id="cpwd">
+						<span class="error_tip">提示訊息</span>
+					</li>
+					<li>
+						<label>電子信箱:</label>
+						<input type="text" name="email" id="email">
+						<span class="error_tip">提示訊息</span>
+					</li>
+					<li class="agreement">
+						<input type="checkbox" name="allow" id="allow" checked="checked">
+						<label>同意”生鲜購物用户使用條款“</label>
+						<span class="error_tip2">提示訊息</span>
+					</li>
+					<li class="reg_sub">
+						<input type="submit" value="註 册">
+					</li>
+				</ul>				
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock body %}

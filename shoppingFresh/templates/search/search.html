@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="navbar_con">
+		<div class="navbar clearfix">
+			<div class="subnav_con fl">
+				<h1>全部商品分類</h1>
+				<span></span>
+				<ul class="subnav">
+					<li><a href="/list_1_1_1" class="fruit">新鮮水果</a></li>
+					<li><a href="/list_2_1_1" class="seafood">水產海鮮</a></li>
+					<li><a href="/list_3_1_1" class="meet">頂級肉品</a></li>
+					<li><a href="/list_4_1_1" class="vegetable">有機蔬菜</a></li>
+					<li><a href="/list_5_1_1" class="drink">鮮奶飲品</a></li>
+					<li><a href="/list_6_1_1" class="snack">休閒零食</a></li>
+				</ul>
+			</div>
+			<ul class="navlist fl">
+				<li><a href="/">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="#">手機生鮮</a></li>
+				<li class="interval">|</li>
+				<li><a href="#">抽獎活動</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="breadcrumb">
+		&nbsp;&nbsp;全部分類&nbsp;&gt;&nbsp;商品搜尋&nbsp;
+	</div>
+
+    <div class="main_wrap clearfix">
+        <ul class="goods_type_list clearfix">
+            {% for item in page %}
+            <li>
+                <a href="/{{item.object.id}}/"><img src="/static/{{item.object.goodspic}}"></a>
+                <h4><a href="/{{item.object.id}}/">{{goods.goodstitle}}</a></h4>
+                <div class="operate">
+                    <span class="prize">${{item.object.goodsprice}}</span>
+                    <span class="unit">{{item.object.goodsunit}}</span>
+                    <a href="/cart/add_{{item.object.id}}_1/" class="add_goods" title="加入購物車"></a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="pagenation">
+            {% if page.has_previous %}
+            <a href="/search/?q={{query}}&amp;page={{page.previous_page_number}}/">上一頁</a>
+            {% endif %}
+
+            {% for pindex in paginator.page_range %}
+            {% if pindex == page.number %}
+            <a href="#" class="active">{{pindex}}</a>
+            {% else %}
+            <a href="/search/?q={{query}}&amp;page={{pindex}}">{{pindex}}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page.has_next %}
+            <a href="/search/?q={{query}}&amp;page={{page.next_page_number}}/">下一頁></a>
+            {% endif %}
+        </div>
+	</div>
+{% endblock content %}

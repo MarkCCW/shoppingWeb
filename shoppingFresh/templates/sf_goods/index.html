@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% block head %}
+	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/static/js/slide.js"></script>
+{% endblock head %}
+
+{% block content %}
+	<div class="navbar_con">
+		<div class="navbar">
+			<h1 class="fl">全部商品分類</h1>
+			<ul class="navlist fl">
+				<li><a href="/">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="#">手機生鮮</a></li>
+				<li class="interval">|</li>
+				<li><a href="#">抽獎活動</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="center_con clearfix">
+		<ul class="subnav fl">
+			<li><a href="#model01" class="fruit">新鮮水果</a></li>
+			<li><a href="#model02" class="seafood">水產海鮮</a></li>
+			<li><a href="#model03" class="meat">頂級肉品</a></li>
+			<li><a href="#model04" class="vegetable">有機蔬菜</a></li>
+			<li><a href="#model05" class="drink">鮮奶飲品</a></li>
+			<li><a href="#model06" class="snack">休閒零食</a></li>
+		</ul>
+		<div class="slide fl">
+			<ul class="slide_pics">
+				<li><img src="/static/images/slide/1_slide.jpg" alt="幻燈片"></li>
+				<li><img src="/static/images/slide/2_slide.jpg" alt="幻燈片"></li>
+				<li><img src="/static/images/slide/3_slide.jpg" alt="幻燈片"></li>
+				<li><img src="/static/images/slide/4_slide.jpg" alt="幻燈片"></li>
+			</ul>
+			<div class="prev"></div>
+			<div class="next"></div>
+			<ul class="points"></ul>
+		</div>
+		<div class="adv fl">
+			<a href="#"><img src="/static/images/adv/1_adv.jpg"></a>
+			<a href="#"><img src="/static/images/adv/2_adv.jpg"></a>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model01">新鲜水果</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for goods in type_hottest_0 %}
+				<a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a>
+				{% endfor %}
+			</div>
+			<a href="/list_1_1_1/" class="goods_more fr" id="fruit_more">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/banner/1_ban.jpg"></div>
+			<ul class="goods_list fl">
+				{% for goods in type_newest_0 %}
+				<li>
+					<h4><a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a></h4>
+					<a href="/{{goods.id}}/"><img src="/static/{{goods.goodspic}}"></a>
+					<div class="prize">${{goods.goodsprice}}</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model02">水產海鮮</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for goods in type_hottest_1 %}
+				<a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a>
+				{% endfor %}
+			</div>
+			<a href=""/list_2_1_1/"" class="goods_more fr">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/banner/2_ban.jpg"></div>
+			<ul class="goods_list fl">
+				{% for goods in type_newest_1 %}
+				<li>
+					<h4><a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a></h4>
+					<a href="/{{goods.id}}/"><img src="/static/{{goods.goodspic}}"></a>
+					<div class="prize">${{goods.goodsprice}}</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model03">頂級肉品</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for goods in type_hottest_2 %}
+				<a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a>
+				{% endfor %}
+			</div>
+			<a href="/list_3_1_1/" class="goods_more fr">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/banner/3_ban.jpg"></div>
+			<ul class="goods_list fl">
+				{% for goods in type_newest_2 %}
+				<li>
+					<h4><a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a></h4>
+					<a href="/{{goods.id}}/"><img src="/static/{{goods.goodspic}}"></a>
+					<div class="prize">${{goods.goodsprice}}</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model04">有機蔬菜</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for goods in type_hottest_3 %}
+				<a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a>
+				{% endfor %}
+			</div>
+			<a href="/list_4_1_1/" class="goods_more fr">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/banner/4_ban.jpg"></div>
+			<ul class="goods_list fl">
+				{% for goods in type_newest_3 %}
+				<li>
+					<h4><a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a></h4>
+					<a href="/{{goods.id}}/"><img src="/static/{{goods.goodspic}}"></a>
+					<div class="prize">${{goods.goodsprice}}</div>
+				</li>
+				{% endfor%}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model05">鮮奶飲品</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for goods in type_hottest_4 %}
+				<a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a>
+				{% endfor %}
+			</div>
+			<a href="/list_5_1_1/" class="goods_more fr">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/banner/5_ban.jpg"></div>
+			<ul class="goods_list fl">
+				{% for goods in type_newest_4 %}
+				<li>
+					<h4><a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a></h4>
+					<a href="/{{goods.id}}/"><img src="/static/{{goods.goodspic}}"></a>
+					<div class="prize">${{goods.goodsprice}}</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model06">休閒零食</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for goods in type_hottest_5 %}
+				<a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a>
+				{% endfor %}
+			</div>
+			<a href="/list_6_1_1/" class="goods_more fr">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/banner/6_ban.jpg"></div>
+			<ul class="goods_list fl">
+				{% for goods in type_newest_5%}
+				<li>
+					<h4><a href="/{{goods.id}}/">{{goods.goodstitle|slice:'10'}}...</a></h4>
+					<a href="/{{goods.id}}/"><img src="/static/{{goods.goodspic}}"></a>
+					<div class="prize">${{goods.goodsprice}}</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block script %}
+	<script type="text/javascript" src="js/slideshow.js"></script>
+	<script type="text/javascript">
+		BCSlideshow('focuspic');
+		var oFruit = document.getElementById('fruit_more');
+		var oShownum = document.getElementById('show_count');
+
+		var hasorder = localStorage.getItem('order_finish');
+
+		if(hasorder)
+		{
+			oShownum.innerHTML = '2';
+		}
+
+		oFruit.onclick = function(){
+			window.location.href = 'list.html';
+		}
+	</script>
+{% endblock script %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block head %}{% endblock head %}
+
+{% block content %}
+	<div class="navbar_con">
+		<div class="navbar clearfix">
+			<div class="subnav_con fl">
+				<h1>全部商品分類</h1>
+				<span></span>
+				<ul class="subnav">
+					<li><a href="/list_1_1_1" class="fruit">新鮮水果</a></li>
+					<li><a href="/list_2_1_1" class="seafood">水產海鮮</a></li>
+					<li><a href="/list_3_1_1" class="meet">頂級肉品</a></li>
+					<li><a href="/list_4_1_1" class="vegetable">有機蔬菜</a></li>
+					<li><a href="/list_5_1_1" class="drink">鮮奶飲品</a></li>
+					<li><a href="/list_6_1_1" class="snack">休閒零食</a></li>
+				</ul>
+			</div>
+			<ul class="navlist fl">
+				<li><a href="/">首頁</a></li>
+				<li class="interval">|</li>
+				<li><a href="#">手機生鮮</a></li>
+				<li class="interval">|</li>
+				<li><a href="#">抽獎活動</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="breadcrumb">
+		&nbsp;&nbsp;全部分類&nbsp;&gt;&nbsp;{{title}}&nbsp;
+        {%if id|default:'' != ''%}
+		&gt;&nbsp;商品詳情
+		{%endif%}
+	</div>
+
+    {%block detail%}{%endblock detail%}
+
+	<div class="main_wrap clearfix">
+		<div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推薦</h3>
+				<ul>
+                    {%for goods in newest%}
+					<li>
+						<a href="/{{goods.id}}/"><img src="/static/{{goods.goodspic}}/"></a>
+						<h4><a href="/{{goods.id}}/">{{goods.goodstitle}}</a></h4>
+						<div class="prize">${{goods.goodsprice}}</div>
+					</li>
+                    {%endfor%}
+				</ul>
+			</div>
+		</div>
+        {%block detail2%}{%endblock detail2%}
+    </div>
+
+{%endblock content%}

@@ -1,0 +1,26 @@
+/* 標籤默認間距設為零 */
+body,ul,ol,p,h1,h2,h3,h4,h5,h6,dl,dd,select,input,textarea,form{margin:0;padding:0}
+
+/* 使h標籤文字大小繼承body文字 */
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+
+/* 刪除列表默認圖標 */
+ul,ol{list-style:none;}
+
+/* 刪除em默認的斜體 */
+em{font-style: normal;}
+
+/* 刪除a標籤默認的下滑線樣式 */
+a{text-decoration:none;}
+
+/* 刪除連結的框線 */
+img{border:0;}
+
+/* 清除浮動 */
+.clearfix:before,.clearfix:after{content:"";display:table}
+.clearfix:after{clear:both;}
+.clearfix{zoom:1}
+
+/* 浮動 */
+.fl{float:left}
+.fr{float:right}

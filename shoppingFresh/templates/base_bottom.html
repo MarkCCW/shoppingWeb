@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生鮮購物-{{title}}</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+    {% block head %}{% endblock head %}
+</head>
+<body>
+	{% block body %}{% endblock body %}
+	<div class="footer no-mp">
+		<div class="foot_link">
+			<a href="#">關於我們</a>
+			<span>|</span>
+			<a href="#">聯絡我們</a>
+			<span>|</span>
+			<a href="#">人才招募</a>
+			<span>|</span>
+			<a href="#">相關連結</a>
+		</div>
+		<p>CopyRight © 2019 生鮮購物有限公司 All Rights Reserved</p>
+		<p>聯絡電話：02-27208889|&nbsp;&nbsp;&nbsp;&nbsp;地址：11008臺北市信義區市府路1號</p>
+	</div>
+	{% block script %}{% endblock script %}
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% extends 'sf_goods/goodsbase.html' %}
+{% block detail %}
+		<div class="r_wrap fr clearfix">
+			<div class="sort_bar">
+				<a href="/list_{{typeinfo.id}}_1_1/"
+				   {% if sort == '1' %}
+				   class="active"
+				   {% endif %}
+				   >最新推薦</a>
+				<a href="/list_{{typeinfo.id}}_1_2/"
+				   {% if sort == '2' %}
+				   class="active"
+				   {% endif %}
+				   >價格排序</a>
+				<a href="/list_{{typeinfo.id}}_1_3/"
+				   {% if sort == '3' %}
+				   class="active"
+				   {% endif %}
+				   >人氣商品</a>
+			</div>
+
+			<ul class="goods_type_list clearfix">
+				{% for goods in page %}
+				<li>
+					<a href="/{{goods.id}}/"><img src="/static/{{goods.goodspic}}"</a>
+					<h4><a href="/{{goods.id}}/">{{goods.goodstitle}}</a></h4>
+					<div class="operate">
+						<span class="prize">${{goods.goodsprice}}</span>
+						<span class="unit">{{goods.goodsunit}}</span>
+						<a href="/cart/add_{{goods.id}}_1/" class="add_goods" title="加入購物車"></a>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+
+			<div class="pagenation">
+				{% if page.has_previous %}
+				<a href="/list_{{typeinfo.id}}_{{page.previous_page_number}}_{{sort}}/">上一頁</a>
+				{% endif %}
+
+				{% for pindex in paginator.page_range %}
+				{% if pindex == page.number %}
+				<a href="#" class="active">{{pindex}}</a>
+				{% else %}
+				<a href="/list_{{typeinfo.id}}_{{pindex}}_{{sort}}/">{{pindex}}</a>
+				{% endif %}
+				{% endfor %}
+
+				{% if page.has_next %}
+				<a href="/list_{{typeinfo.id}}_{{page.next_page_number}}_{{sort}}/">下一頁</a>
+				{% endif %}
+			</div>
+		</div>
+{% endblock detail %}

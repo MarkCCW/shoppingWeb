@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script type="text/javascript">
+	$(function(){
+		var total_count = 0; //商品總個數
+		var total_money = 0; //商品總金額
+
+		$('.col07').each(function(){
+			count = parseInt($(this).prev().text());
+			price = parseFloat($(this).prev().prev().children('span').text());
+			subtotal = count * price;
+			$(this).text(subtotal.toFixed(2)+'元');
+			total_count ++;
+			total_money += subtotal;
+		});
+
+		$('#total_count').text(total_count);
+		$('#total_money').text(total_money.toFixed(2)+'元');
+
+		$('#final_pay').text((total_money+100).toFixed(2)+'元');
+		$('#final_pay_post').val((total_money+100).toFixed(2));
+	})
+</script>
+{% endblock head %}
+
+{% block content %}
+
+	<h3 class="common_title">確認收貨地址</h3>
+	<div class="common_list_con clearfix">
+		<dl>
+			<dt>寄送到：</dt>
+			<dd><input type="radio" name="" checked="">{{user.userpostalcode}}&nbsp;{{user.useraddress}}&nbsp;({{user.userreceiver}} 收)&nbsp;{{user.userphone}}</dd>
+		</dl>
+		<a href="/user/site/" class="edit_site">編輯收貨地址</a>
+
+	</div>
+	
+	<h3 class="common_title">付款方式</h3>
+	<div class="common_list_con clearfix">
+		<div class="pay_style_con clearfix">
+			<input type="radio" name="pay_style" checked>
+			<label class="cash">貨到付款</label>
+			<input type="radio" name="pay_style">
+			<label class="mobile">行動付款</label>
+			<input type="radio" name="pay_style">
+			<label class="bank">信用卡付款</label>
+		</div>
+	</div>
+
+	<h3 class="common_title">商品列表</h3>
+	
+	<div class="common_list_con clearfix">
+		<ul class="goods_list_th clearfix">
+			<li class="col01">商品名稱</li>
+			<li class="col02">商品單位</li>
+			<li class="col03">商品價格</li>
+			<li class="col04">數量</li>
+			<li class="col05">小計</li>
+		</ul>
+
+		{% for cart in carts %}
+		<ul class="goods_list_td clearfix">
+			<li class="col01">{{forloop.counter}}</li>
+			<li class="col02"><img src="/static/{{cart.goods.goodspic}}"></li>
+			<li class="col03">{{cart.goods.goodstitle|slice:'10'}}...</li>
+			<li class="col04">{{cart.goods.goodsunit}}</li>
+			<li class="col05"><span>{{cart.goods.goodsprice}}</span>元</li>
+			<li class="col06">{{cart.count}}</li>
+			<li class="col07">0元</li>
+		</ul>
+		{% endfor %}
+
+	</div>
+
+	<h3 class="common_title">總金額結算</h3>
+
+	<div class="common_list_con clearfix">
+		<div class="settle_con">
+			<div class="total_goods_count">
+				共計<em id="total_count">0</em>件商品,
+				總金額<b id="total_money">0元</b>
+			</div>
+			<div class="transit">運費：<b>100元</b></div>
+			<div class="total_pay">最後付款金額：<b id="final_pay">0元</b></div>
+		</div>
+	</div>
+
+	<div class="order_submit clearfix">
+		<form action="/order/order_handle/" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="receiver_info" value="{{user.userpostalcode}}&nbsp;{{user.useraddress}}&nbsp;({{user.userreceiver}} 收)&nbsp;{{user.userphone}}">
+			<input type="hidden" id="final_pay_post" name="" value="0">
+			<input type="hidden" name="cart_ids" value="{{cart_ids}}">
+			<input type="submit" class="btn" id="order_btn" value="訂單確認">
+		</form>
+	</div>	
+
+{% endblock content %}

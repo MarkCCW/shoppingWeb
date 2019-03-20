@@ -1,0 +1,82 @@
+{% extends "base_bottom.html" %}
+
+{% block head %}
+	<script type="text/javascript">
+		$(function(){
+			var name_error = false;
+			var pwd_error = false;
+
+			if({{error_name}} == 1){
+				$('.user_error').html('用户名錯誤').show();
+			}
+			if({{error_pwd}} == 1){
+				$('.pwd_error').html('密碼錯誤').show();
+			}
+
+			$('.name_input').blur(function(){
+				if($('.name_input').val().length == 0){
+					$('.user_error').html('請輸入用户名').show();
+					name_error = false;
+				}else{
+					name_error = true;
+					$('.user_error').hide();
+				}
+			});
+
+			$('.pass_input').blur(function(){
+				if($(this).val().length == 0){
+					$('.pwd_error').html('請輸入密碼').show();
+					pwd_error = false;
+				}else{
+					pwd_error = true;
+					$('.pwd_error').hide();
+				}
+
+			});
+
+
+			$('.input_submit').submit(function(){
+				if(name_error == false && pwd_error == false){
+					return true;
+				}
+				else{
+					return false;
+				}
+			});
+
+		})
+	</script>
+{% endblock head %}
+
+{% block body %}
+	<div class="login_top clearfix">
+		<a href="/" class="login_logo"><img src="/static/images/logo02.png"></a>
+	</div>
+	<div class="login_form_bg">
+		<div class="login_form_wrap clearfix">
+			<div class="login_banner fl"></div>
+			<div class="slogan fl">生鮮購物 · 快速送達</div>
+			<div class="login_form fr">
+				<div class="login_title clearfix">
+					<h1>用户登錄</h1>
+					<a href="/user/register/">立即註冊</a>
+				</div>
+				<div class="form_input">
+					<form action="/user/login_handle/" method="post">
+						{% csrf_token %}
+						<input type="text" name="username" class="name_input" value="{{username}}" placeholder="請輸入用户名">
+						<div class="user_error">輸入錯誤</div>
+						<input type="password" name="pwd" class="pass_input" value="{{userpwd}}" placeholder="請輸入密碼">
+						<div class="pwd_error">輸入錯誤</div>
+						<div class="more_input clearfix">
+							<input type="checkbox" name="remb_me" value="1" checked="checked">
+							<label>記住用户名</label>
+							<a href="#">忘記密碼</a>
+						</div>
+						<input type="submit" name="" value="登錄" class="input_submit">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock body %}

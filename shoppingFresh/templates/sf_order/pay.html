@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>訂單付款</title>
+</head>
+<body>
+    <h1>模擬付款頁面</h1>
+    訂單編號：{{order.orderid}}
+    <br>
+    應付金額：{{order.ordertotal}}
+    <br>
+    付款成功,3秒後自動跳轉
+    <script>
+        setTimeout('location.href="/user/order/";',3000);
+    </script>
+</body>
+</html>
