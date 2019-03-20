@@ -4,27 +4,27 @@
 
 <生鮮購物網站首頁>
 
-![index][https://github.com/MarkCCW/shoppingWeb/blob/master/readme_pic/index.png]
+![index][readme_pic/index.png]
 
 <用戶登入>
 
-![login][https://github.com/MarkCCW/shoppingWeb/blob/master/readme_pic/login.png]
+![login][readme_pic/login.png]
 
 <用戶註冊>
 
-![register][https://github.com/MarkCCW/shoppingWeb/blob/master/readme_pic/register.png]
+![register][readme_pic/register.png]
 
 <購物車內容>
 
-![cart][https://github.com/MarkCCW/shoppingWeb/blob/master/readme_pic/cart.png]
+![cart][readme_pic/cart.png]
 
 <訂單資訊>
 
-![orders][https://github.com/MarkCCW/shoppingWeb/blob/master/readme_pic/order.png]
+![orders][readme_pic/order.png]
 
 <搜尋商品>
 
-![search][https://github.com/MarkCCW/shoppingWeb/blob/master/readme_pic/search.png]
+![search][readme_pic/search.png]
 
 ## 主要功能介紹
 - 1.使用者相關資訊
@@ -32,6 +32,7 @@
 - 3.購物車內容資訊 
 - 4.訂單內容及購買流程
 - 5.搜尋商品
+
 
 ## Django-MTV架構
 ### Model
@@ -58,6 +59,7 @@ class OrderDetailInfo(models.Model):
     goods = models.ForeignKey('sf_goods.GoodsInfo')
     order = models.ForeignKey(OrderInfo)
 ```
+
 ### Template
 將模板內容重複的部分使用繼承方式來編寫，`base.html`呈現網頁頂部的選項，`base_bottom.html`呈現網頁底部的資訊
 ```html
@@ -96,6 +98,7 @@ class OrderDetailInfo(models.Model):
 	</div>
 {% endblock body %}
 ```
+
 ### View
 Django的MTV架構`(Model-Template-View)`，一般MVC架構的View是用來呈現獲取的資料給使用者，而Django的View的目的不是"資料如何呈現"，而是"呈現哪一個資料"。
 ```python
@@ -207,6 +210,7 @@ def order_handle(request):
     
     return redirect('/user/order/')
 ```
+
 ### 商品搜尋功能
 使用`haystack`模組並搭配`whoosh`搜尋引擎
 ```python
