@@ -29,7 +29,7 @@ def order(request):
 
 
 # 使用事務功能,處理訂單操作
-
+@transaction.atomic
 @user_decorator.login
 def order_handle(request):
     # 創建回歸點
