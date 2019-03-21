@@ -1,7 +1,6 @@
 # ShoppingFresh
 使用Django開發購物網站DEMO
 
-
 <生鮮購物網站首頁>
 
 ![index](https://github.com/MarkCCW/shoppingWeb/blob/master/readme_pic/index.png)
@@ -115,8 +114,8 @@ def login(request):
 
 ## 其他實作功能介紹
 ### 用戶登入驗證-裝飾器
-登入驗證：透過url請求用戶相關資訊時，都先檢查用戶是否在登入狀態下進行請求
-驗證方式：用戶驗證模組python裝飾器`user_decorator.py`
+- 登入驗證：透過url請求用戶相關資訊時，都先檢查用戶是否在登入狀態下進行請求
+- 驗證方式：用戶驗證模組python裝飾器`user_decorator.py`
 ```python
 def login(func):
     def login_func(request, *args, **kwargs):
@@ -210,6 +209,7 @@ def order_handle(request):
     
     return redirect('/user/order/')
 ```
+
 ### 商品搜尋功能
 使用`haystack`模組並搭配`whoosh`搜尋引擎
 ```python
