@@ -33,7 +33,7 @@ def order(request):
 @user_decorator.login
 def order_handle(request):
     # 創建回歸點
-
+    point = transaction.savepoint()
     # 購物車編號
     cart_ids = request.POST.get("cart_ids")
     try:
@@ -78,14 +78,17 @@ def order_handle(request):
                 cart.delete()
             else:
                 # 如果庫存少於購買數量,操作失敗
-
+                transaction.savepoint_rollback(point)
                 return redirect('/cart/')
         # 操作成功
         order.ordertotal = total_money + 100
         order.save()
-
+        transaction.savepoint_commit(point)
+        
     except Exception as e:
         print '================%s'%e
+        transaction.savepoint_rollback(point)
+        
     return redirect('/user/order/')
 
 
